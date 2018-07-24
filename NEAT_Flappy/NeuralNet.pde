@@ -78,6 +78,6 @@ class NeuralNet {
     bias_hidden.mutate(mutRate);
     bias_output.mutate(mutRate);
     if (random(mutRate) < mutRate)
-      lr = lr + randomGaussian() * .01;
+      lr = lr + randomGaussian() * .05;
   }
 }

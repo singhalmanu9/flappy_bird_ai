@@ -124,7 +124,7 @@ class Matrix {
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < cols; j ++)
         if (random(1) < mutRate)
-          table[i][j] = table[i][j] + randomGaussian()*.05;
+          table[i][j] = table[i][j] + randomGaussian()*.5;
     }
   }
 

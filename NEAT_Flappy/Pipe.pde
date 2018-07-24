@@ -12,7 +12,7 @@ class Pipe {
   }
   
   void show() {
-    fill(0);
+    fill(0, 255, 0);
     rect(x, 0, 50, top);
     rect(x, top + spacing, 50, height - (top-spacing));
   }

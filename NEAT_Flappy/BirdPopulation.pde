@@ -13,7 +13,8 @@ class BirdPopulation {
 
   void update() {
     for (Bird b : birds) {
-      b.update(b.best); //<>//
+      b.update(b.best);
+      hiScore = max(int(b.score), hiScore); //<>//
     }
   }
 
@@ -28,12 +29,15 @@ class BirdPopulation {
   void calcFitness() {
     Bird best = null;
     float total = 0;
+    float totalScore = 0;
     for (Bird bird : birds) {
       bird.calcFitness();
       total += bird.fitness;
+      totalScore += bird.score;
       if (best == null || bird.fitness > best.fitness)
         best = bird;
     }
+    avgScore = totalScore/birds.size();
     this.best = new Bird(best.brain);
     this.best.best = true;
     
