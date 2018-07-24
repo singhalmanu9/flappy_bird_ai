@@ -15,7 +15,7 @@ void setup() {
 }
 
 void draw() {
-  for (int c = 0; c < 3; c ++) {
+  for (int c = 0; c < 5; c ++) {
     background(255);
 
     b.update();

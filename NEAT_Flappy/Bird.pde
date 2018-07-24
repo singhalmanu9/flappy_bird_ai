@@ -48,7 +48,7 @@ class Bird {
   }
 
   void calcFitness() {
-    fitness = (score > 0) ? score + counter/100.0 : 0.0001;
+    fitness = (score > 0) ? score*10 + counter/100.0 : 0.0001;
   }
 
   void show(boolean isBest) {
@@ -63,7 +63,7 @@ class Bird {
     }
     fill(255, 0, 0);
     textSize(20);
-    text(score + counter/100.0 + "", x, y);
+    text(score*10 + counter/100.0 + "", x, y);
   }
 
   void update(boolean isBest) {

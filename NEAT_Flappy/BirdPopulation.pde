@@ -63,7 +63,7 @@ class BirdPopulation {
         return b;
       }
     }
-    return null;
+    return birds.get(birds.size()-1);
   }
 
   void mutate() {
