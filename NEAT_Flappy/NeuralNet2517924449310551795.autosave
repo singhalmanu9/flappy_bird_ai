@@ -1,0 +1,72 @@
+class NeuralNet {
+  
+  Matrix input_to_hidden;
+  Matrix hidden_to_output;
+  Matrix bias_hidden;
+  Matrix bias_output;
+  
+  NeuralNet(int input, int hidden, int output) {
+    input_to_hidden = new Matrix(hidden, input);
+    hidden_to_output = new Matrix(output, hidden);
+    input_to_hidden.randomize();
+    hidden_to_output.randomize();
+    bias_hidden = new Matrix(hidden, 1);
+    bias_output = new Matrix(output, 1);
+    bias_hidden.randomize();
+    bias_output.randomize();
+  }
+  
+  Matrix feedforward(Matrix input) {
+    Matrix h = input_to_hidden.mult(input).add(bias_hidden);
+    activate(h);
+    
+    Matrix out = hidden_to_output.mult(h).add(bias_output);
+    activate(out);
+    return out;
+  }
+  
+  void activate(Matrix input) {
+    for (int i = 0; i < input.rows; i ++) {
+      for (int j = 0; j < input.cols; j++) {
+        input.table[i][j] = 1/(1+exp(-input.table[i][j]));
+      }
+    }
+  }
+  
+  NeuralNet clone() {
+    NeuralNet result = new NeuralNet(input_to_hidden.cols, input_to_hidden.rows, hidden_to_output.rows);
+    result.bias_hidden = bias_hidden;
+    result.bias_output = bias_output;
+    result.hidden_to_output = hidden_to_output;
+    result.input_to_hidden = input_to_hidden;
+    return result;
+  }
+  
+  void mutate() {
+    float mutRate = .05;
+    for (int i = 0; i < bias_hidden.rows; i ++) {
+      for (int j = 0; j < bias_hidden.cols; j++) {
+        if (random(1) < mutRate)
+          bias_hidden.table[i][j] = random(-1, 1);
+      }
+    }
+    for (int i = 0; i < bias_output.rows; i ++) {
+      for (int j = 0; j < bias_output.cols; j++) {
+        if (random(1) < mutRate)
+          bias_output.table[i][j] = random(-1, 1);
+      }
+    }
+    for (int i = 0; i < input_to_hidden.rows; i ++) {
+      for (int j = 0; j < input_to_hidden.cols; j++) {
+        if (random(1) < mutRate)
+          input_to_hidden.table[i][j] = random(-1, 1);
+      }
+    }
+    for (int i = 0; i < hidden_to_output.rows; i ++) {
+      for (int j = 0; j < hidden_to_output.cols; j++) {
+        if (random(1) < mutRate)
+          hidden_to_output.table[i][j] = random(-1, 1);
+      }
+    }
+  }
+}
